@@ -1,26 +1,23 @@
-name: Festool Monitor
-
-on:
-  workflow_dispatch:
-
-jobs:
-  test:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-
-      - name: Install dependencies
-        run: pip install requests
-
-      - name: Run monitor
-        env:
-          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
-          CHAT_ID: ${{ secrets.CHAT_ID }}
-        run: python monitor.py
+import os
+import requests
+ 
+BOT_TOKEN = os.environ["BOT_TOKEN"]
+CHAT_ID = os.environ["CHAT_ID"]
+ 
+message = """
+✅ Festool/Makita Monitor virker!
+ 
+Denne besked er sendt automatisk fra GitHub.
+"""
+ 
+url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
+ 
+response = requests.post(
+url,
+data={
+"chat_id": CHAT_ID,
+"text": message
+}
+)
+ 
+print(response.text)
