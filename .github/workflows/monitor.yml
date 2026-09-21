@@ -12,44 +12,40 @@ jobs:
 7
 test:
 8
- 
-9
 runs-on: ubuntu-latest
+9
+ 
 10
- 
-11
 steps:
-12
- 
-13
+11
 - name: Checkout
-14
+12
 uses: actions/checkout@v4
-15
+13
  
-16
+14
 - name: Setup Python
-17
+15
 uses: actions/setup-python@v5
-18
+16
 with:
-19
+17
 python-version: "3.12"
-20
+18
  
-21
+19
 - name: Install dependencies
-22
+20
 run: pip install requests
-23
+21
  
-24
+22
 - name: Run monitor
-25
+23
 env:
-26
+24
 BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
-27
+25
 CHAT_ID: ${{ secrets.CHAT_ID }}
-28
+26
 run: python monitor.py
