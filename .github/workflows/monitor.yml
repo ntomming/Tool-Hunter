@@ -1,0 +1,55 @@
+name: Festool Monitor
+2
+ 
+3
+on:
+4
+workflow_dispatch:
+5
+ 
+6
+jobs:
+7
+test:
+8
+ 
+9
+runs-on: ubuntu-latest
+10
+ 
+11
+steps:
+12
+ 
+13
+- name: Checkout
+14
+uses: actions/checkout@v4
+15
+ 
+16
+- name: Setup Python
+17
+uses: actions/setup-python@v5
+18
+with:
+19
+python-version: "3.12"
+20
+ 
+21
+- name: Install dependencies
+22
+run: pip install requests
+23
+ 
+24
+- name: Run monitor
+25
+env:
+26
+BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+27
+CHAT_ID: ${{ secrets.CHAT_ID }}
+28
+run: python monitor.py
